@@ -5,12 +5,13 @@ A simple project demonstrating how to provision AWS infrastructure (VPC, Subnet,
 ---
 
 ## 📁 Project Structure
-
+```
 ├── bootstrap/        # One-time setup: S3 bucket & DynamoDB table for backend state
 ├── config/           # Infrastructure modules
 │├── vpc/             # Custom VPC & Security Group
 │└── web/             # EC2 Instance configuration
 └── .gitlab-ci.yml    # CI/CD Pipeline definition
+```
 ---
 
 ## 🔄 CI/CD Pipeline Workflow
