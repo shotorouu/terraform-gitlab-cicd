@@ -1,6 +1,29 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.5"
+    }
+  }
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
+
 resource "aws_s3_bucket" "terraform_state" {
   bucket        = var.bucket_backend
   force_destroy = true
+}
+
+import {
+  to = aws_s3_bucket.terraform_state
+  id = var.bucket_backend
+}
+
+import {
+  to = aws_dynamodb_table.terraform_locks
+  id = var.table_backend
 }
 
 resource "aws_s3_bucket_versioning" "terraform_state_versioning" {
@@ -21,7 +44,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "terraform_state_c
   }
 }
 
-
 resource "aws_dynamodb_table" "terraform_locks" {
   name         = var.table_backend
   billing_mode = "PAY_PER_REQUEST"
@@ -31,17 +53,4 @@ resource "aws_dynamodb_table" "terraform_locks" {
     name = "LockID"
     type = "S"
   }
-}
-
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 6.5"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-east-1"
 }
