@@ -35,7 +35,8 @@ terraform apply -var="bucket_backend=YOUR_BUCKET_NAME" -var="table_backend=YOUR_
 ```
 2. Configure GitLab CI/CD Variables
 In your GitLab repository, go to Settings > CI/CD > Variables and add:
-1. `MY_AWS_ACCESS_KEYAWS` Access Key ID
-2. `MY_AWS_SECRET_KEYAWS` Secret Access Key
+
+`MY_AWS_ACCESS_KEYAWS` Access Key ID
+`MY_AWS_SECRET_KEYAWS` Secret Access Key
 
 And ensure that AWS_BACKEND_BUCKET and AWS_BACKEND_TABLE inside .gitlab-ci.yml match the resources created in Step 1.
